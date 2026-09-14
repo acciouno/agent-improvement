@@ -37,7 +37,7 @@ reminders). One wrong stored date once caused a same-day correction cascade.
 
 ## Provenance
 
-- **Created:** 2026-09-14 — a wrongly stored SFVA start date (Sun Sep 20) had
+- **Created:** 2026-09-14 — a wrongly stored work start date (Sun Sep 20) had
   to be corrected to Mon Sep 21 after the user flagged it; Pimsleur Day 1
   moved with it.
 - **Last validated:** 2026-09-14 — applied during the RSI paper read (all
