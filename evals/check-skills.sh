@@ -24,6 +24,7 @@ REQUIRED_SECTIONS=(
   "## Procedure"
   "## Depends on / conflicts with"
   "## How to tell it's working"
+  "## Intended executor"
   "## Provenance"
   "## Changelog"
   "## Known limits"
