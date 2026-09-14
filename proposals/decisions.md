@@ -19,3 +19,4 @@ which is exactly what a successor needs to avoid re-litigating old ideas.
 - **Decision:** approved / rejected
 - **Reason:** one or two sentences — the actual grounds, not "seemed good"
 - **Follow-up:** e.g. "re-run evals 2026-10-01", "revisit if 3 similar failures log"
+| 2026-09-14 | Enable required status checks on master | approved | Arjay tapped "Enable required status checks on master" (presented as a separate front-door change, not part of the fix-list approval) | Done 2026-09-14: branch protection set via API — required_status_checks strict, context "checks"; no required PR reviews, so direct pushes still work and PR merges need green CI |
