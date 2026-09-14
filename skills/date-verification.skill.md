@@ -32,7 +32,9 @@ reminders). One wrong stored date once caused a same-day correction cascade.
 
 - None known. If a scheduling/reminder skill is added later, this one constrains
   it: no date-driven action without verification first. This skill wins any
-  conflict about whether a date is "probably fine."
+  conflict about whether a date is "probably fine." On skill-authoring
+  questions, `_meta` wins — the two govern different questions, so they should
+  never genuinely collide.
 
 ## How to tell it's working
 
@@ -51,7 +53,8 @@ confirm the weekday rather than guessing.
   to be corrected to Mon Sep 21 after the user flagged it; Pimsleur Day 1
   moved with it.
 - **Last validated:** 2026-09-14 — applied during the RSI paper read (all
-  date claims grounded via `date -d` before use).
+  date claims grounded portably — `date -d` on GNU/Linux,
+  `date -j -f '%Y-%m-%d'` on macOS/BSD — before use).
 - **Rejected alternatives:** "trust MEMORY.md silently" — rejected because a
   single stale entry propagated into multiple downstream artifacts.
 
@@ -60,6 +63,8 @@ confirm the weekday rather than guessing.
 - 2026-09-14: created from the Sep 13 correction incident.
 - 2026-09-14: procedure made portable (GNU + BSD date); trigger tightened to
   produce/persist; added Intended executor.
+- 2026-09-14: precedence vs `_meta` clarified; stale `date -d`-only wording
+  in Last-validated fixed to the portable form.
 
 ## Known limits
 

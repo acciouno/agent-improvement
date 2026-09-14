@@ -6,6 +6,10 @@
 > Revision history:
 > - 2026-09-14: Guideline 7 revised — the fixed per-task/per-session token
 >   numbers were removed; the surface-the-breach principle was kept.
+> - 2026-09-14: Guideline 7 clarified — "the limit" now means a budget stated
+>   for the task; if none was stated, say so instead of assuming one.
+>   Guideline 11 corrected to `lessons.md` (the repo keeps it at the root;
+>   there is no `tasks/` directory).
 
 **Bias: caution over speed on non-trivial work. For trivial tasks, use judgment.**
 
@@ -94,7 +98,10 @@ When the boundary is ambiguous, ask: "Is there a codepath that handles this with
 
 **Surface the breach. Do not silently overrun.**
 
-If approaching the limit: summarize completed work, state what remains, and flag the constraint explicitly before continuing or stopping.
+"The limit" means a token budget stated for the task. If approaching it:
+summarize completed work, state what remains, and flag the constraint
+explicitly before continuing or stopping. If no budget was stated, say so
+rather than assuming one — an unevaluable rule is not a rule.
 
 ## 8. Surface Conflicts, Don't Average Them
 
@@ -133,7 +140,7 @@ For long agentic runs, treat this as mandatory. Silence after a complex step is 
 When the user corrects your approach, output, or reasoning:
 
 - Identify the pattern behind the mistake, not just the instance.
-- Append the rule to `tasks/lessons.md` in this format:
+- Append the rule to `lessons.md` in this format:
 
   ```
   ## [date] [short label]
@@ -141,9 +148,9 @@ When the user corrects your approach, output, or reasoning:
   Rule: [generalized principle that prevents recurrence]
   ```
 
-- At the start of each session, review `tasks/lessons.md` for rules relevant to the current task.
+- At the start of each session, review `lessons.md` for rules relevant to the current task.
 
-A correction that doesn't update `tasks/lessons.md` is a correction that will repeat.
+A correction that doesn't update `lessons.md` is a correction that will repeat.
 
 ## 12. Fail Loud
 
@@ -157,4 +164,4 @@ Default to surfacing uncertainty. The cost of a false positive ("it works") is a
 
 ---
 
-**These guidelines are working if:** diffs contain fewer unnecessary changes, rewrites due to overcomplication decrease, clarifying questions arrive before implementation rather than after mistakes, and `tasks/lessons.md` grows shorter over time as mistake patterns stop recurring.
+**These guidelines are working if:** diffs contain fewer unnecessary changes, rewrites due to overcomplication decrease, clarifying questions arrive before implementation rather than after mistakes, and `lessons.md` grows shorter over time as mistake patterns stop recurring.

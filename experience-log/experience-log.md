@@ -16,13 +16,17 @@ or dismisses it. Lessons are not allowed to rot in limbo — an open loop that
 never fires is a diary, not an improvement system.
 
 ```
-## 2026-09-14-01 — <task>
+## YYYY-MM-DD-NN — <task>
 - Outcome: <what happened>
 - Worked: <what helped>
 - Failed: <what didn't, and why you think so>
 - Skills used: <per skill: retrieved? followed? helped / harmed / neutral>
 - Lesson: <the enum above>
 ```
+
+(The placeholder uses `YYYY-MM-DD-NN` deliberately — a real-looking example
+ID here would resolve against the format block instead of a real entry, and
+CI's citation check skips fenced code blocks.)
 
 The `Skills used` block is the contribution record. The review aggregates it
 into uses / helped / harmed per skill — that's what the retirement decision

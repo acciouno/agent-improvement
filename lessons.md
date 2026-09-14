@@ -25,4 +25,7 @@ skim this file for relevant rules.
 Mistake: A wrongly stored start date (Sun Sep 20) was treated as fact and
 propagated into multiple artifacts before being corrected to Mon Sep 21.
 Rule: Never work out weekdays from memory; ground every date-sensitive claim
-with `date -d` and re-verify against the most recent correction before acting.
+with a real `date` invocation — `date -d` on GNU/Linux,
+`date -j -f '%Y-%m-%d'` on macOS/BSD — and re-verify against the most recent
+correction before acting. (This rule itself once prescribed `date -d` only;
+fixed 2026-09-14 after it failed on macOS.)

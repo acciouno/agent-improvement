@@ -29,7 +29,12 @@ Keep the skill library small, non-overlapping, and evidence-backed.
 
 ## Depends on / conflicts with
 
-- None. This skill constrains all future skills; conflicts resolve in its favor.
+- None. This skill constrains all future skills **on authoring-process
+  questions** (when to create / extend / refuse, cap discipline) — conflicts
+  on process resolve in its favor. It does not override domain skills inside
+  their own domain: e.g. date-verification wins any conflict about whether a
+  date is "probably fine." If the two ever genuinely overlap, the narrower
+  domain claim wins and the overlap is flagged for cleanup per guideline 8.
 
 ## How to tell it's working
 
@@ -53,6 +58,9 @@ Any agent working in this repo.
 ## Changelog
 
 - 2026-09-14: created from the external review.
+- 2026-09-14: precedence clarified — wins on authoring-process questions;
+  domain skills win inside their own domain (resolves the overlap with
+  date-verification's supremacy claim).
 
 ## Known limits
 
