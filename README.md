@@ -16,15 +16,22 @@ This setup targets **L1 with touches of L2** on the paper's autonomy ladder:
 ## The two loops
 
 **Inner loop — daily task execution.** The agent does work using the current
-skills. Every task appends one entry to `experience-log/experience-log.md`:
-what worked, what failed, and why. Failures are the most valuable entries.
+skills. Every task appends one entry to `experience-log/experience-log.md`
+(ID format `YYYY-MM-DD-NN`): what worked, what failed, and why. Failures are
+the most valuable entries.
 
-**Outer loop — system improvement.** On review (weekly, or whenever you ask),
-the agent reads the experience log and writes *proposals* into `proposals/`.
-Each proposal says: which skill it targets, what would change, what evidence
-motivates it (linked log entries), and what regression risk it carries.
-You approve or reject. Approved proposals become skill updates, each recorded
-with provenance in the skill's changelog.
+**Outer loop — system improvement.** On review (whenever you ask; weekly
+suggested), follow `reviews/review-template.md`: sweep the log for lessons,
+check registry health, decide pending proposals, audit the evaluator itself,
+and check cross-skill interactions. Each review appends a row to
+`reviews/review-log.md`. Without the review, the log is B0 with a filing
+cabinet — the review is what closes the loop.
+
+Proposals live in `proposals/` and say: which skill is targeted, what would
+change, what evidence motivates it (linked log-entry IDs), and what regression
+risk it carries. Decisions — approvals *and* rejections — are recorded in
+`proposals/decisions.md`. You approve or reject; approved changes get a
+changelog entry and a re-run of the regression checks.
 
 This inner/outer separation is the Humanlaya pattern from the paper: one loop
 repairs the current delivery, the other improves the system that will handle
@@ -57,16 +64,20 @@ retrieval and stalls improvement. So:
 ## Layout
 
 - `skills/` — versioned skill files + `_index.md` registry
-- `experience-log/` — append-only log of task outcomes
-- `proposals/` — pending / approved / rejected improvement proposals
-- `evals/` — fixed regression checklist (the acceptance tests)
+- `experience-log/` — append-only log of task outcomes (stable entry IDs)
+- `proposals/` — pending proposals, `decisions.md` log, one filled example
+- `evals/` — fixed regression checklist (the acceptance tests) + run log
+- `reviews/` — outer-loop procedure: template + review log
 - `templates/` — blank skill and proposal templates
+- `LICENSE` — MIT
 
 ## Quick start
 
 1. Read `skills/_index.md`, then one skill file to see the format.
 2. After the agent finishes a task, check that it logged the outcome in
-   `experience-log/experience-log.md`.
-3. When you want a review, ask: "review the experience log and propose
-   skill updates." Proposals land in `proposals/` awaiting your decision.
-4. After approving a change, run the regression checklist in `evals/`.
+   `experience-log/experience-log.md` with an entry ID.
+3. When you want a review, say "run an outer-loop review." Proposals land in
+   `proposals/`; decisions go in `proposals/decisions.md`; the review itself
+   is logged in `reviews/review-log.md`.
+4. After approving a change, run the regression checklist in `evals/` and log
+   the run.

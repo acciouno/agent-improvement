@@ -6,8 +6,11 @@ detail. The outer-loop review reads this file, so write for a future reader
 
 ## Format
 
+Every entry gets a stable ID — `YYYY-MM-DD-NN` (NN = sequence that day) —
+because proposals link to entries, and links need anchors that survive edits.
+
 ```
-## YYYY-MM-DD — <task>
+## 2026-09-14-01 — <task>
 - Outcome: <what happened>
 - Worked: <what helped>
 - Failed: <what didn't, and why you think so>
@@ -16,7 +19,7 @@ detail. The outer-loop review reads this file, so write for a future reader
 
 ---
 
-## 2026-09-14 — RSI paper explanation (EXAMPLE ENTRY)
+## 2026-09-14-01 — RSI paper explanation (EXAMPLE ENTRY)
 
 - Outcome: Read arXiv 2609.11873v1 end to end (~4,700 lines) and explained it
   in plain terms with examples.

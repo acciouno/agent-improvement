@@ -4,6 +4,8 @@
 > A skill with an empty Provenance section is not trusted — it is a candidate
 > for retirement.
 
+**Version:** 1.0 — bump minor on revisions, major on rewrites.
+
 ## Purpose
 
 What this skill is for, in one or two sentences.
@@ -16,6 +18,20 @@ keywords. If the trigger is vague, the skill will misfire.
 ## Procedure
 
 The actual steps, commands, or decision rules. Concrete beats clever.
+
+## Depends on / conflicts with
+
+Other skills this one assumes, extends, or contradicts. Changing a skill can
+invalidate another's assumptions — the paper's cross-component diagnosis
+problem — so declare the relationships up front. "None known" is acceptable
+once, not forever.
+
+## How to tell it's working
+
+Observable signs this skill is helping (not just present). E.g. "date errors
+caught before acting: count in experience log," or "regression check N passes."
+The paper's structural-vs-effective distinction: a skill file existing is
+structural; it changing outcomes is effective. Track the latter.
 
 ## Provenance
 
