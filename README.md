@@ -88,6 +88,7 @@ retrieval and stalls improvement. So:
 - `evals/` — fixed regression checklist + `check-skills.sh` (deterministic) + run log
 - `reviews/` — outer-loop procedure: template + review log
 - `templates/` — blank skill and proposal templates
+- `guidelines.md` — the 12 behavioral rules governing agent work in this repo
 - `LICENSE` — MIT
 
 ## Quick start
