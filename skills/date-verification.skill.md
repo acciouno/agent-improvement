@@ -70,3 +70,5 @@ confirm the weekday rather than guessing.
 
 - Only as good as the source it checks against; if the user misstates a date,
   this skill will faithfully verify the wrong date. Garbage in, verified garbage out.
+
+<!-- gate-probe: deliberate mixed skills+evals change to test CI. DO NOT MERGE. -->

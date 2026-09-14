@@ -108,3 +108,5 @@ done
 
 echo "---"
 [ "$fail" -eq 0 ]
+
+# gate-probe: deliberate mixed skills+evals change to test CI. DO NOT MERGE.
