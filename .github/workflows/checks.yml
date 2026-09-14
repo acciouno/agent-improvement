@@ -9,31 +9,59 @@ on:
 jobs:
   checks:
     runs-on: ubuntu-latest
+    env:
+      # Outer pins for the evaluator itself. These live in the workflow file —
+      # outside the scripts' reach — so a compromised script cannot hide its
+      # own modification. Changing a script requires changing its pin here,
+      # which is a visible eval change: it needs its own proposal and a human
+      # decision, like any eval change. After an APPROVED eval change,
+      # regenerate all four pins in the same commit:
+      #   sha256sum evals/check-skills.sh evals/check-consistency.sh \
+      #             evals/check-log.sh evals/regression-checklist.md
+      CHECK_SKILLS_SHA256: 8485f3cb9fec19dc05ef603667ce79aa3404450b4e5bc72898c59f70bc189d79
+      CHECK_CONSISTENCY_SHA256: 259a4fa53bacc9663b810ce133c57e7d2a64dcbacd1c913e8f66e0cd7ebf4cc1
+      CHECK_LOG_SHA256: d88a3cc0c4247df11e3b1ebd8e6204ccdcec4a01cc6b8f2b28a9ea8f998364bb
+      CHECKLIST_SHA256: 0713b8fed0e53531a19f3f696a628240d5cf28360df29ff5d9b71fb6e2c118c4
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
+      - name: evaluator scripts unmodified (outer hash pins)
+        run: |
+          echo "$CHECK_SKILLS_SHA256  evals/check-skills.sh" | sha256sum -c -
+          echo "$CHECK_CONSISTENCY_SHA256  evals/check-consistency.sh" | sha256sum -c -
+          echo "$CHECK_LOG_SHA256  evals/check-log.sh" | sha256sum -c -
+          echo "$CHECKLIST_SHA256  evals/regression-checklist.md" | sha256sum -c -
+
       - name: skill registry checks
         run: ./evals/check-skills.sh
 
-      - name: consistency checks (eval pin + evidence IDs)
+      - name: experience-log structure checks
+        run: ./evals/check-log.sh
+
+      - name: consistency checks (eval pin + evidence IDs + proposal format)
         run: ./evals/check-consistency.sh
 
-      - name: no mixed skills+evals changes in one push
-        if: github.event_name == 'push'
+      - name: no mixed skills+evals changes
         run: |
-          base="${{ github.event.before }}"
+          if [ "${{ github.event_name }}" = "push" ]; then
+            base="${{ github.event.before }}"
+            head="${{ github.sha }}"
+          else
+            base="${{ github.event.pull_request.base.sha }}"
+            head="${{ github.sha }}"
+          fi
           if [ "$base" = "0000000000000000000000000000000000000000" ]; then
             echo "first push; skipping"
             exit 0
           fi
-          files="$(git diff --name-only "$base" "${{ github.sha }}")"
+          files="$(git diff --name-only "$base" "$head")"
           s=0; e=0
           echo "$files" | grep -q '^skills/' && s=1 || true
           echo "$files" | grep -q '^evals/' && e=1 || true
           if [ "$s" -eq 1 ] && [ "$e" -eq 1 ]; then
-            echo "FAIL: one push touches both skills/ and evals/ — separate them"
+            echo "FAIL: one change touches both skills/ and evals/ — separate them"
             exit 1
           fi
           echo "PASS: no mixed skills+evals changes"

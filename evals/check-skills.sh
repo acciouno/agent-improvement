@@ -4,13 +4,16 @@
 #
 # Verifies every `active` skill in skills/_index.md:
 #   1. the skill file exists
-#   2. it contains every required template section
+#   2. it contains every required template section (line-anchored match —
+#      renaming a heading must fail, not just deleting one)
 #   3. Provenance names a Created and a Last-validated date
-#   4. it is inside its review window (Next review >= today)
+#   4. it is inside its review window (Next review >= today); a blank
+#      Next review on an active skill is a FAIL, not a skip
+#   5. the active skill count is within the cap (12)
 #
 # Usage: ./evals/check-skills.sh   (from the repo root)
 # Exit 0 when all checks pass, 1 otherwise. Nothing is silently skipped:
-# unverifiable rows are reported as SKIP, not omitted.
+# the only SKIP left is "no active skills at all" (nothing to verify).
 
 set -u
 
@@ -70,7 +73,11 @@ while IFS= read -r row; do
 
   section_fail=0
   for section in "${REQUIRED_SECTIONS[@]}"; do
-    if ! grep -qF -- "$section" "$path"; then
+    # Line-anchored fixed-string match on whitespace-stripped lines: the
+    # heading must BE the section line. A substring match lets "## Known
+    # limits" be renamed to "## Known limits (renamed)" — or demoted to a
+    # sentence — and still pass. That must fail.
+    if ! sed 's/[[:space:]]*$//' "$path" | grep -qxF -- "$section"; then
       echo "FAIL: $name: missing section: $section"
       section_fail=1
     fi
@@ -88,13 +95,27 @@ while IFS= read -r row; do
   fi
 
   if [ -z "$next_review" ]; then
-    skip_msg "$name: no Next review date in registry — window unverifiable"
+    # A blank review date on an ACTIVE skill used to SKIP — and skips never
+    # reached the exit code, so CI read it as a pass. The window is required
+    # and derivable; missing means FAIL. (The checklist's own words: a silent
+    # skip is a false pass.)
+    fail_msg "$name: blank Next review date — the review window is required for active skills, not optional"
   elif [[ "$next_review" < "$TODAY" ]]; then
     fail_msg "$name: past review date ($next_review < $TODAY) — revalidate, revise, or retire"
   else
     pass_msg "$name: inside review window (next review $next_review)"
   fi
 done <<< "$active_rows"
+
+# The cap is the brake on unbounded library drift (the paper's mechanism
+# against it). The registry already states it; now it's counted.
+CAP=12
+active_count="$(printf '%s\n' "$active_rows" | grep -c . || true)"
+if [ "$active_count" -gt "$CAP" ]; then
+  fail_msg "active skill count $active_count exceeds cap $CAP — displace an incumbent or justify growing the cap (human decision)"
+else
+  pass_msg "active skill count $active_count within cap $CAP"
+fi
 
 echo "---"
 echo "pass=$pass fail=$fail skipped=$skipped"
