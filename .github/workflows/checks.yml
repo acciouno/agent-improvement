@@ -1,0 +1,39 @@
+name: repo-checks
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: skill registry checks
+        run: ./evals/check-skills.sh
+
+      - name: consistency checks (eval pin + evidence IDs)
+        run: ./evals/check-consistency.sh
+
+      - name: no mixed skills+evals changes in one push
+        if: github.event_name == 'push'
+        run: |
+          base="${{ github.event.before }}"
+          if [ "$base" = "0000000000000000000000000000000000000000" ]; then
+            echo "first push; skipping"
+            exit 0
+          fi
+          files="$(git diff --name-only "$base" "${{ github.sha }}")"
+          s=0; e=0
+          echo "$files" | grep -q '^skills/' && s=1 || true
+          echo "$files" | grep -q '^evals/' && e=1 || true
+          if [ "$s" -eq 1 ] && [ "$e" -eq 1 ]; then
+            echo "FAIL: one push touches both skills/ and evals/ — separate them"
+            exit 1
+          fi
+          echo "PASS: no mixed skills+evals changes"
