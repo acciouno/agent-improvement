@@ -3,8 +3,9 @@
 > Copy this template into `skills/<short-name>.skill.md` and fill every section.
 > A skill with an empty Provenance section is not trusted — it is a candidate
 > for retirement.
-
-**Version:** 1.0 — bump minor on revisions, major on rewrites.
+>
+> No manual version field: git is the version history. If you feel the need
+> for a version number, the skill is probably doing too much — split it.
 
 ## Purpose
 
@@ -21,10 +22,9 @@ The actual steps, commands, or decision rules. Concrete beats clever.
 
 ## Depends on / conflicts with
 
-Other skills this one assumes, extends, or contradicts. Changing a skill can
-invalidate another's assumptions — the paper's cross-component diagnosis
-problem — so declare the relationships up front. "None known" is acceptable
-once, not forever.
+Other skills this one assumes, extends, or contradicts. When two skills
+conflict, do not average them: state which one wins and why, and flag the
+other for cleanup. "None known" is acceptable once, not forever.
 
 ## How to tell it's working
 

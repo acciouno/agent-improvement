@@ -25,11 +25,32 @@ New skill:
 - Slows down short-paper requests; apply judgment under ~5 pages.
 ```
 
+## Assumptions
+
+- Papers over ~5 pages have a meaningful conclusion/limitations section.
+- The reader's failure mode is title-abstract anchoring, not lack of speed.
+
 ## Motivating evidence
 
 - `2026-09-14-01` — title-first reading of the RSI paper misled; the
   contribution was a survey/framework, not a breakthrough. Conclusion-first
   would have set the right frame in minutes.
+
+## Root cause
+
+Cause, not symptom: the error was in *reading order* (frame set by title),
+not in summarization ability. Re-reading more carefully wouldn't fix it;
+reading in a different order would.
+
+## Out of scope
+
+- Does not change how papers are cited or stored.
+- Does not apply to non-paper documents (decided separately if needed).
+
+## Acceptance criteria
+
+- Next three paper summaries each open with a demonstrated-vs-claimed
+  sentence before any detail. Check the experience log.
 
 ## Regression risk
 

@@ -3,8 +3,6 @@
 > Worked example — a real lesson, kept as the first skill so the format has
 > something concrete to imitate.
 
-**Version:** 1.0
-
 ## Purpose
 
 Prevent acting on wrong date-sensitive claims (deadlines, start dates,
@@ -29,7 +27,8 @@ reminders). One wrong stored date once caused a same-day correction cascade.
 ## Depends on / conflicts with
 
 - None known. If a scheduling/reminder skill is added later, this one constrains
-  it: no date-driven action without verification first.
+  it: no date-driven action without verification first. This skill wins any
+  conflict about whether a date is "probably fine."
 
 ## How to tell it's working
 
