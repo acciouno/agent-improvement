@@ -10,7 +10,8 @@ which is exactly what a successor needs to avoid re-litigating old ideas.
 
 ## Format for new rows
 
-- **Date:** when decided · **Proposal:** link to the file in `proposals/`
+- **Date:** when decided · **Proposal:** path to the file, e.g.
+  `proposals/approved/2026-09-20-x.md`
 - **Decision:** approved / rejected
 - **Reason:** one or two sentences — the actual grounds, not "seemed good"
 - **Follow-up:** e.g. "re-run evals 2026-10-01", "revisit if 3 similar failures log"

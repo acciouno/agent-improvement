@@ -10,14 +10,18 @@ reminders). One wrong stored date once caused a same-day correction cascade.
 
 ## Trigger conditions
 
-- Any task involving a calendar date, deadline, launch, or scheduled event.
+- Any task that **produces, stores, or persists** a calendar date (deadlines,
+  start dates, reminders, crons). The expensive failure mode is *storing* a
+  wrong date, not merely mentioning one.
 - Any claim of the form "X happens on <date>" that will drive an action
   (reminder, booking, message, cron).
 
 ## Procedure
 
-1. Do not work out the weekday from memory — run `date -d` for every relevant
-   date first.
+1. Never work out the weekday from memory. Ground every relevant date first —
+   portably:
+   - GNU/Linux: `date -d '2026-10-17' '+%A'`
+   - macOS/BSD: `date -j -f '%Y-%m-%d' '2026-10-17' '+%A'`
 2. Cross-check the date against the most recent authoritative source in context
    (user correction beats stored memory; stored memory beats inference).
 3. If the user has ever corrected this date before, treat the correction as
@@ -35,6 +39,12 @@ reminders). One wrong stored date once caused a same-day correction cascade.
 - Zero same-day date corrections in the experience log since adoption.
 - Regression check 1 passes on every review.
 
+## Intended executor
+
+Any agent working in this repo. The procedure assumes shell access with a
+working `date`; on a machine without one, degrade to asking the human to
+confirm the weekday rather than guessing.
+
 ## Provenance
 
 - **Created:** 2026-09-14 — a wrongly stored work start date (Sun Sep 20) had
@@ -48,6 +58,8 @@ reminders). One wrong stored date once caused a same-day correction cascade.
 ## Changelog
 
 - 2026-09-14: created from the Sep 13 correction incident.
+- 2026-09-14: procedure made portable (GNU + BSD date); trigger tightened to
+  produce/persist; added Intended executor.
 
 ## Known limits
 

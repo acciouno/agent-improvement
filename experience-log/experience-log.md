@@ -7,15 +7,27 @@ detail. The outer-loop review reads this file, so write for a future reader
 ## Format
 
 Every entry gets a stable ID — `YYYY-MM-DD-NN` (NN = sequence that day) —
-because proposals link to entries, and links need anchors that survive edits.
+because proposals cite entries, and citations need anchors that survive edits.
+
+**Lesson is a closed enum** — `none` | `proposed: <proposal file>` |
+`dismissed: <reason>`. "Not yet proposed" is not a value. A candidate lesson
+may sit unproposed for at most one review cycle; the review either proposes
+or dismisses it. Lessons are not allowed to rot in limbo — an open loop that
+never fires is a diary, not an improvement system.
 
 ```
 ## 2026-09-14-01 — <task>
 - Outcome: <what happened>
 - Worked: <what helped>
 - Failed: <what didn't, and why you think so>
-- Lesson: <candidate skill change, or "none">
+- Skills used: <per skill: retrieved? followed? helped / harmed / neutral>
+- Lesson: <the enum above>
 ```
+
+The `Skills used` block is the contribution record. The review aggregates it
+into uses / helped / harmed per skill — that's what the retirement decision
+runs on, not the calendar alone. Without the retrieved/followed split you
+can't distinguish a bad skill from a good skill the agent never opened.
 
 ---
 
@@ -28,5 +40,5 @@ because proposals link to entries, and links need anchors that survive edits.
 - Failed: First assumed the paper was a breakthrough announcement from the
   title; the actual contribution is a survey + framework. Title-first reading
   misleads.
-- Lesson: candidate skill — "read the conclusion and limitations before
-  summarizing any paper's claims" (not yet proposed).
+- Skills used: none (predates the skill library).
+- Lesson: proposed: proposals/EXAMPLE-proposal-format.md

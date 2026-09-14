@@ -41,10 +41,13 @@ proposals, audit the evaluator itself, and check cross-skill interactions.
 Each review appends a row to `reviews/review-log.md`. Without the review, the
 log is B0 with a filing cabinet — the review is what closes the loop.
 
-Proposals live in `proposals/` and say: which skill is targeted, what would
-change, the assumptions behind it, what evidence motivates it (linked
-log-entry IDs), whether it treats a cause or a symptom, what is out of scope,
-how success will be recognized, and what regression risk it carries.
+Proposals live in `proposals/pending|approved|rejected/` — status is the
+filesystem, moved with `git mv` on decision. Each proposal states: which
+skill is targeted, a falsifiable hypothesis, the assumptions behind it, what
+evidence motivates it (cited by stable log-entry ID), whether it treats a
+cause or a symptom, why an existing skill can't absorb it, what is out of
+scope, acceptance criteria with kill criteria, and what regression risk it
+carries. The evidence must exist **before merge**, not as a follow-up promise.
 Decisions — approvals *and* rejections — are recorded in
 `proposals/decisions.md`. You approve or reject; approved changes get a
 changelog entry and a re-run of the regression checks.
@@ -72,11 +75,17 @@ later deliveries.
 ## Retirement rule (anti library-drift)
 
 The paper names the failure mode: an ever-growing skill library degrades
-retrieval and stalls improvement. So:
+retrieval and stalls improvement — and warns that retiring too aggressively
+performs worse than leaving the library unguided. So the 60-day date is a
+review *trigger*, not a verdict:
 
 - Every skill has a **last-validated date** in `skills/_index.md`.
-- Any skill unvalidated for **60 days** is flagged for review: revalidate,
-  revise, or delete.
+- At review, the decision uses the **contribution record** — uses, helped,
+  harmed, split by retrieved vs. followed — aggregated from the experience
+  log. Idle-but-valuable (e.g. an annual task skill) stays; unused-and-unhelpful
+  goes.
+- **Active cap: 12** (adjustable by the human; the point is that it's finite).
+  A new skill displaces an incumbent or justifies growing the cap.
 - Deletion is safe: git history keeps everything, so rollback is one command.
 
 ## Layout
@@ -85,8 +94,9 @@ retrieval and stalls improvement. So:
 - `experience-log/` — append-only log of task outcomes (stable entry IDs)
 - `lessons.md` — distilled rules from corrections (the `tasks/lessons.md` role)
 - `proposals/` — pending proposals, `decisions.md` log, one filled example
-- `evals/` — fixed regression checklist + `check-skills.sh` (deterministic) + run log
+- `evals/` — fixed regression checklist + deterministic scripts + run log
 - `reviews/` — outer-loop procedure: template + review log
+- `.github/workflows/` — CI: runs the eval scripts, blocks mixed skills+evals changes
 - `templates/` — blank skill and proposal templates
 - `guidelines.md` — the 12 behavioral rules governing agent work in this repo
 - `LICENSE` — MIT

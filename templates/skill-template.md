@@ -6,6 +6,9 @@
 >
 > No manual version field: git is the version history. If you feel the need
 > for a version number, the skill is probably doing too much — split it.
+>
+> Before drafting, read `skills/_meta.skill.md` — the authoring policy. The
+> first question is whether an existing skill can absorb this change.
 
 ## Purpose
 
@@ -18,7 +21,9 @@ keywords. If the trigger is vague, the skill will misfire.
 
 ## Procedure
 
-The actual steps, commands, or decision rules. Concrete beats clever.
+The actual steps, commands, or decision rules. Concrete beats clever. Commands
+must be portable or carry their platform fallback — a procedure that only runs
+on one OS is a procedure that fails silently on the other.
 
 ## Depends on / conflicts with
 
@@ -32,6 +37,11 @@ Observable signs this skill is helping (not just present). E.g. "date errors
 caught before acting: count in experience log," or "regression check N passes."
 The paper's structural-vs-effective distinction: a skill file existing is
 structural; it changing outcomes is effective. Track the latter.
+
+## Intended executor
+
+Who/what this skill is written for. A skill useful to its author may be
+unsuitable for a different executor — state the assumption.
 
 ## Provenance
 
