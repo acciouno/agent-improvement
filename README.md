@@ -4,6 +4,16 @@ A human-gated improvement setup for a personal AI agent, built from the
 ideas in *The Last AI Built by Humans: Toward Genuine Recursive Self-Improvement*
 (arXiv 2609.11873v1).
 
+## Research base
+
+- *The Last AI Built by Humans: Toward Genuine Recursive Self-Improvement*
+  (arXiv 2609.11873v1) — the survey this setup is built from.
+- [awesome-rsi](https://github.com/theseus-labs-rsi/awesome-rsi) — the survey's
+  companion catalog: 519 RSI papers tagged by autonomy level (L1–L5) and
+  updated-object family. The L4 section (retained memory/skills altering later
+  behavior within a fixed process) is the closest reading list for this loop's
+  design space.
+
 ## The honest framing
 
 This setup targets **L1 with touches of L2** on the paper's autonomy ladder:
