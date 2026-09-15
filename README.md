@@ -13,6 +13,10 @@ ideas in *The Last AI Built by Humans: Toward Genuine Recursive Self-Improvement
   updated-object family. The L4 section (retained memory/skills altering later
   behavior within a fixed process) is the closest reading list for this loop's
   design space.
+- [Theseus Lab](https://theseus-labs-rsi.github.io/) — the lab's homepage:
+  the survey paper, the B0–L5 autonomy roadmap figure, and short "Perspectives"
+  essays (Relay on turning failures into reusable skills; Atlas on successors
+  needing executable evidence and failed branches).
 
 ## The honest framing
 
